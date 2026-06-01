@@ -1,38 +1,28 @@
+import octopusReference from "@/assets/octopus-reference.png.asset.json";
+
 type OctopusMarkProps = {
   size?: number;
   className?: string;
   monochrome?: boolean;
 };
 
-/**
- * Coreblow octopus mascot — clean proportional build.
- * - Round head (ellipse) centered top-half of viewBox
- * - 6 symmetric stroked tentacles with rounded caps
- * - Big friendly eyes on lower half of head
- * API (size/className/monochrome) is unchanged.
- */
 export function OctopusMark({ size = 240, className, monochrome = false }: OctopusMarkProps) {
-  const body = monochrome ? "currentColor" : "var(--color-coral)";
-  const spot = monochrome ? "currentColor" : "var(--color-coral-deep)";
-  const eye = monochrome ? "var(--color-background)" : "#3A2018";
-  const shine = monochrome ? "currentColor" : "#ffffff";
-
-  // Tentacles: start near bottom of head, curl outward.
-  // Each path: M start -> C control1 control2 end
-  const tentacles = [
-    // Far left — longest, curling out & down
-    "M 70 150 C 50 170, 30 190, 24 214",
-    // Mid left
-    "M 86 162 C 74 184, 64 202, 60 222",
-    // Inner left — short, tucked in
-    "M 104 170 C 100 188, 98 204, 100 220",
-    // Inner right
-    "M 136 170 C 140 188, 142 204, 140 220",
-    // Mid right
-    "M 154 162 C 166 184, 176 202, 180 222",
-    // Far right — longest mirror
-    "M 170 150 C 190 170, 210 190, 216 214",
-  ];
+  if (!monochrome) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 1254 1254"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+        aria-label="Coreblow octopus mascot"
+        role="img"
+      >
+        <image href={octopusReference.url} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" />
+      </svg>
+    );
+  }
 
   return (
     <svg
@@ -45,36 +35,10 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
       aria-label="Coreblow octopus mascot"
       role="img"
     >
-      {/* Tentacles (drawn first so head overlaps their tops cleanly) */}
-      <g stroke={body} strokeWidth="22" strokeLinecap="round" fill="none">
-        {tentacles.map((d, i) => (
-          <path key={i} d={d} />
-        ))}
-      </g>
-
-      {/* Head — round, slightly wider than tall */}
-      <ellipse cx="120" cy="110" rx="74" ry="70" fill={body} />
-
-      {/* Sucker cluster — small, on upper-right of head */}
-      <ellipse cx="160" cy="78" rx="3.2" ry="2.6" fill={spot} opacity="0.9" />
-      <ellipse cx="170" cy="88" rx="2.8" ry="2.2" fill={spot} opacity="0.9" />
-      <ellipse cx="158" cy="94" rx="2.4" ry="2" fill={spot} opacity="0.9" />
-      <ellipse cx="168" cy="104" rx="2.2" ry="1.8" fill={spot} opacity="0.9" />
-
-      {/* Eyes — proportional, lower half of head */}
-      <ellipse cx="98" cy="122" rx="9" ry="11" fill={eye} />
-      <ellipse cx="142" cy="122" rx="9" ry="11" fill={eye} />
-      <circle cx="95" cy="118" r="2.6" fill={shine} />
-      <circle cx="139" cy="118" r="2.6" fill={shine} />
-
-      {/* Subtle smile */}
       <path
-        d="M 110 148 Q 120 156, 130 148"
-        stroke={eye}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.7"
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M127.1 18.9c26.8-2.9 56 3 79 17.7 40.6 26.1 59.7 69.3 55 111.8-3.7 34-17.8 64.4-40.1 89.5-5.4 6-10.5 12.5-11.5 19.9-1.5 11.8 4 22.6 12.6 30.4 10.5 9.5 22.6 13.1 35.7 10.4 9.3-1.9 16.9-8.3 20.5-16.9 3.2-7.5 3.3-16.4 5.1-24.4 4.2-18 15.1-34 30.5-44.4 10.7-7.3 23.7-11.2 36.7-9.7 19 2.1 35.8 16.7 39.6 35.7 2.8 13.7-2.2 28.8-13.8 36.8-5.8 4.1-14 6.2-20.7 2.9-4.2-2-7.3-6.2-7.2-11 0-3 1.4-6.2 4.4-7.2 2.1-.6 3.2 1 4.8 2 2.6 1.8 6.3 2 9 .3 3.8-2.3 5.5-7.1 5.1-11.4-.9-9.7-10.1-17.2-19.6-16.9-8.7.3-16.2 6.2-20.6 13.4-6.6 10.9-5.6 24.4-6.3 36.6-.9 17.9-6.2 35.5-17.2 49.8-8.3 10.8-19.7 18.9-32.5 23.6-10.8 4-22.4 5.1-33.7 3.9-8.1-.9-15.8-3.1-23.3-6.2-1.2-.5-2.3-1-2.3-2.4-.1-13.5-9.3-27.4-21.3-33.4-6.4-3.2-14-5.2-21.1-4.5-3.2.3-6.1-1.4-8.3-3.6-7.1-6.9-16.4-11.3-24.8-16.4-13.1-8-24.8-18.7-34.7-30.5-.8-1-1.7-2-3-2.3-.7 4.1-.2 8.4-.1 12.6.8 19.4 4.3 38.6 10.3 57.1 4.7 14.3 10.8 28.8 20.9 40.1 8.4 9.4 20.6 16.1 33.5 14 6.1-1 11.9-4.4 15.1-9.8 3-5 3.4-11.8.3-16.8-3.2-5.3-10.4-7.7-16.3-5.5-2.8 1-4.7 3.5-6 6.1-1.4 2.8-5 2.7-7.1.9-4.3-3.7-4.8-10.3-3.5-15.5 2.1-8.5 8.8-15.5 16.9-18.7 11.3-4.5 24.7-2.4 34.5 4.7 11.1 8 17.9 20.9 18 34.6.2 21.8-13.8 42.2-33.2 51.3-18.6 8.8-41.2 7.7-59.7-.4-26.9-11.9-45-36.6-56.6-63.1-7.6-17.4-13-35.8-16.7-54.5-.9-4.8-1.7-9.6-2.9-14.4-.8 1.1-1.1 2.4-1.3 3.7-3.6 19.8-9.2 39.4-17.9 57.6-9.1 19.2-22.3 37.8-40.3 49.9-13.9 9.5-30.8 15.5-47.8 14.8-19.4-.8-38.6-10.6-49.4-26.8-9.8-14.6-12.6-34.4-5.8-50.8 3.8-9.1 11.9-16.8 21.4-19.3 11.4-3 24.3.4 31.8 9.6 5 6.2 7 15.6 3.4 22.9-1.6 3.1-5.4 5.6-8.8 4-1.8-.9-2.5-3-3.5-4.7-2.5-4.6-8-7.1-13.1-6-5.9 1.3-10.3 7-10.2 13 0 5.9 3.9 11.1 9 13.9 7.3 3.8 16.5 4.2 24.3 1.8 12.1-3.7 22-12.5 29.3-22.6 11.3-15.5 18.4-33.6 23.2-52 .5-2.1 1.2-4.4.4-6.5-8.8 2.4-17.8 3.6-26.9 3.2-18.5-.7-37-8.3-49.6-21.9-11.9-12.7-19.2-29.4-20.8-46.7-.9-10.2-.3-20.8-2.2-30.9-1.5-8.3-5.1-16.8-12.2-21.8-4.4-3.1-10.7-4.4-15.2-1.1-5.6 4.1-5.8 13.4-1.2 18.4 2.4 2.6 6.4 3.5 7.5 7.1 1.8 6.6-5.1 12.7-11.3 12.2-10-.8-18.2-8.9-21.9-18-5.3-13.1-2.9-28.5 5.5-39.8 9-12 24.2-19.2 39.1-18.2 13.5.8 26.5 7.7 34.4 18.7 8.3 11.4 11 25.2 13.2 38.8 1.5 9.4 2.9 19.5 8.8 27.4 7.3 9.8 20.5 13.9 32.2 12.3 12.4-1.8 24.1-8.1 33.6-16.1-6.4-3.6-12-8.4-16.8-13.9-11.9-13.7-17.7-31.7-18.8-49.5-1.3-22.2 4.4-44.2 14.8-63.8 8.7-16.3 20.8-31 35.9-42.3C75.4 28.3 100.6 21.7 127.1 18.9Zm-32 77.6c-14.1 3.6-24.5 17.8-23.3 32.3.9 11.5 9.3 22.2 20.3 25.4 13.4 3.9 28.8-2.7 35.2-15.4 6.3-12.5 2.4-29.1-9.2-37.3-6.5-4.7-15.4-6.9-22.9-5Zm78.9.3c-17.2 4.1-27.8 23.1-22.8 39.9 4 13.3 17.5 22.9 31.4 21.4 13.5-1.4 25.4-12.4 27.6-25.9 2.1-12.8-4.2-26.5-15.5-32.8-5.9-3.4-13.5-4.4-20.7-2.6Z"
       />
     </svg>
   );
