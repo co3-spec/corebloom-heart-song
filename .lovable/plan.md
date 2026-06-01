@@ -1,35 +1,27 @@
-## Plan: Landing Page coreblow.com + Octopus Mascot SVG
+## Masalah
 
-**Positioning**: Coreblow = CLI AI agent rival openclaw.ai. Brutalist neon dark theme, octopus coral sebagai mascot playful contrast.
+`OctopusMark.tsx` saat ini dibuat dari satu `<path>` panjang yang menggabungkan kepala + 6 tentakel sekaligus. Kurva tentakel ditulis manual koordinat-per-koordinat, sehingga:
 
-**Arah desain**: Brutalist Kinetic Neon (v3) — bg hitam #050607, aksen neon cyan #00f5ff, tipografi Space Grotesk + JetBrains Mono. Mascot octopus coral memberi kontras warna hangat di tengah dunia neon dingin.
+- Kepala terlalu kecil dibanding area tentakel (proporsi pear-shape, bukan bulat seperti referensi)
+- Tentakel panjang-pendeknya tidak konsisten, ada yang overlap aneh & melilit balik
+- Mata terlalu turun & terlalu besar relatif terhadap kepala
+- Bercak sucker hanya di satu sisi atas, membuat siluet asimetris
 
-### Mascot Octopus (BARU)
+## Rencana redesign
 
-`src/components/landing/OctopusMark.tsx` — komponen SVG inline:
-- `viewBox="0 0 240 240"`, recreated dari gambar referensi user (body bulat coral, 6 tentakel curl simetris, mata coklat tua dengan highlight putih)
-- Warna asli: body `#E26A56` (coral), bintik `#C9523F`, mata `#3A2018`
-- Props: `className`, `size` (default 240)
-- Tidak embed PNG — semua path SVG agar tajam & ringan
-- Animasi CSS: float halus translateY ±6px (4s ease infinite), opsional mata blink
+Tulis ulang `src/components/landing/OctopusMark.tsx` dengan pendekatan **komponen terpisah** alih-alih satu path raksasa:
 
-### Sections landing page (single page `/`)
+1. **Kepala**: satu `<ellipse>` / `<path>` bulat-membulat (proporsi ±60% tinggi viewBox), dengan sedikit lebih lebar dari tinggi supaya terlihat "menggembung" khas octopus kartun.
+2. **Tentakel**: 6 buah, di-generate dari array konfigurasi `{ angle, length, curl }`. Masing-masing dirender sebagai `<path>` stroke tebal dengan `stroke-linecap="round"` — ini jauh lebih mudah dijaga proporsinya daripada filled path. Tentakel disusun simetris 3 kiri / 3 kanan, panjang menurun ke tengah supaya siluet seperti referensi.
+3. **Mata**: dua lingkaran proporsional (radius ~8, bukan 13), posisi di sepertiga atas kepala. Highlight putih kecil offset kiri-atas.
+4. **Sucker dots**: dipindah ke bagian dahi/atas kepala dengan pola lebih natural (cluster kecil), atau dihilangkan agar mascot lebih clean — saya pilih cluster kecil 4 titik.
+5. **viewBox** tetap `0 0 240 240`, prop `size`, `className`, `monochrome` tetap kompatibel — tidak ada perubahan API, jadi `Hero`, `Nav`, `Footer` tidak perlu diubah.
+6. Animasi `float` yang sudah ada di `styles.css` tetap dipakai dari sisi pemanggil.
 
-1. **Nav sticky** — mini octopus (32px) + wordmark "COREBLOW", link Docs/Plugins/Pricing, tombol Sign In outline neon
-2. **Hero** — badge versi, headline "The AI Agent with Explosive Speed", **octopus besar (200-240px) mengambang di atas terminal window** dengan glow halo cyan, terminal dengan typewriter `curl -sL coreblow.sh | sh`
-3. **Feature grid** — 6 kartu (Sub-ms Latency, Multi-Model Routing, Plugin Forge, Context Aware, Secure Vault, Native GUI)
-4. **Comparison table** — Coreblow vs OpenClaw, 4 baris dengan kolom Coreblow di-highlight neon
-5. **Pricing** — 3 tier (Hacker free, Pro $20, Enterprise custom), tier tengah ditinggikan
-6. **Testimonials** — 3 dev quotes gaya tweet
-7. **Footer** — logo octopus + tagline + 3 kolom link + copyright
+## Verifikasi
 
-### Detail teknis
+Setelah edit, ambil screenshot preview untuk konfirmasi bentuk sudah proporsional di hero & nav (ukuran kecil).
 
-- Update `src/styles.css`: tambah CSS variables `--accent` (neon cyan oklch), `--coral` (octopus), import Google Fonts Space Grotesk + JetBrains Mono. Keyframes `typewriter`, `blink`, `float`, `slideUp`.
-- `src/routes/__root.tsx`: tambahkan `<link>` ke Google Fonts di head, update default meta site name
-- `src/routes/index.tsx`: hapus placeholder, update `head()` (title "Coreblow — The AI Agent with Explosive Speed", description, og tags), render landing sections
-- Komponen di `src/components/landing/`: `Nav.tsx`, `Hero.tsx`, `Features.tsx`, `Comparison.tsx`, `Pricing.tsx`, `Testimonials.tsx`, `Footer.tsx`, `OctopusMark.tsx`, `TerminalWindow.tsx`
+## File yang diubah
 
-### Yang TIDAK termasuk
-- Auth, database, payment, halaman terpisah, backend install script
-- Tidak ada gambar raster — semuanya SVG inline + CSS
+- `src/components/landing/OctopusMark.tsx` (rewrite isi, API tetap)
