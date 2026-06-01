@@ -1,4 +1,4 @@
-import octopusReference from "@/assets/octopus-reference.png.asset.json";
+import octopusReference from "@/assets/octopus-transparent.png.asset.json";
 
 type OctopusMarkProps = {
   size?: number;
