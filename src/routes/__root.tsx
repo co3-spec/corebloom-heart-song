@@ -82,6 +82,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Coreblow" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { property: "og:title", content: "Coreblow" },
+      { name: "twitter:title", content: "Coreblow" },
+      { property: "og:description", content: "The AI agent with explosive speed." },
+      { name: "twitter:description", content: "The AI agent with explosive speed." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/63ec6843-931a-424d-a1d3-10b31c208369/id-preview-cd208b60--7982cceb-f34f-402f-a83c-32debc5f0c6f.lovable.app-1780381234669.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/63ec6843-931a-424d-a1d3-10b31c208369/id-preview-cd208b60--7982cceb-f34f-402f-a83c-32debc5f0c6f.lovable.app-1780381234669.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
