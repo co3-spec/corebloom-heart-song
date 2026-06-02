@@ -20,13 +20,6 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
         role="img"
       >
         <image href={octopusReference.url} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" />
-        {/* Animated shine in eyes */}
-        <g className="octo-shine-left">
-          <circle cx="0" cy="0" r="14" fill="#ffffff" opacity="0.95" />
-        </g>
-        <g className="octo-shine-right">
-          <circle cx="0" cy="0" r="14" fill="#ffffff" opacity="0.95" />
-        </g>
         {/* Blink eyelids — colored like the body */}
         <ellipse className="octo-lid" cx="481" cy="594" rx="58" ry="60" fill="#dd6a55" />
         <ellipse className="octo-lid" cx="744" cy="594" rx="58" ry="60" fill="#dd6a55" />
