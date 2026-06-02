@@ -89,8 +89,8 @@
   }
 }
 
-.octo-shine-left { animation: octo-shine-left 4s ease-in-out infinite; transform: translate(478px, 588px); }
-.octo-shine-right { animation: octo-shine-right 4s ease-in-out infinite; transform: translate(741px, 588px); }
+.octo-shine-left { animation: octo-shine-left 6s linear infinite; transform: translate(478px, 588px); }
+.octo-shine-right { animation: octo-shine-right 6s linear infinite; transform: translate(741px, 588px); }
 .octo-lid { transform-box: fill-box; transform-origin: center; animation: octo-blink 5s ease-in-out infinite; }
 
 :root {
