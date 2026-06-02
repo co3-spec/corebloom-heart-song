@@ -66,21 +66,31 @@
     94%, 97% { transform: scaleY(1); }
   }
   @keyframes octo-shine-left {
-    0%, 100% { transform: translate(478px, 588px); }
-    25% { transform: translate(498px, 585px); }
-    50% { transform: translate(495px, 605px); }
-    75% { transform: translate(470px, 600px); }
+    0%   { transform: translate(478px, 588px); }
+    12.5%{ transform: translate(490px, 582px); }
+    25%  { transform: translate(498px, 590px); }
+    37.5%{ transform: translate(498px, 602px); }
+    50%  { transform: translate(488px, 608px); }
+    62.5%{ transform: translate(475px, 605px); }
+    75%  { transform: translate(469px, 597px); }
+    87.5%{ transform: translate(471px, 588px); }
+    100% { transform: translate(478px, 588px); }
   }
   @keyframes octo-shine-right {
-    0%, 100% { transform: translate(741px, 588px); }
-    25% { transform: translate(761px, 585px); }
-    50% { transform: translate(758px, 605px); }
-    75% { transform: translate(733px, 600px); }
+    0%   { transform: translate(741px, 588px); }
+    12.5%{ transform: translate(753px, 582px); }
+    25%  { transform: translate(761px, 590px); }
+    37.5%{ transform: translate(761px, 602px); }
+    50%  { transform: translate(751px, 608px); }
+    62.5%{ transform: translate(738px, 605px); }
+    75%  { transform: translate(732px, 597px); }
+    87.5%{ transform: translate(734px, 588px); }
+    100% { transform: translate(741px, 588px); }
   }
 }
 
-.octo-shine-left { animation: octo-shine-left 4s ease-in-out infinite; transform: translate(478px, 588px); }
-.octo-shine-right { animation: octo-shine-right 4s ease-in-out infinite; transform: translate(741px, 588px); }
+.octo-shine-left { animation: octo-shine-left 6s linear infinite; transform: translate(478px, 588px); }
+.octo-shine-right { animation: octo-shine-right 6s linear infinite; transform: translate(741px, 588px); }
 .octo-lid { transform-box: fill-box; transform-origin: center; animation: octo-blink 5s ease-in-out infinite; }
 
 :root {
