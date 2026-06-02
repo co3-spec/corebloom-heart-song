@@ -66,22 +66,50 @@
     94%, 97% { transform: scaleY(1); }
   }
   /* Both eyes look in the same direction. Natural saccades: quick movement,
-     long fixation pauses. Offsets are the SAME for both eyes. */
+     fixation pauses with subtle micro-saccades (±1-2px jitter). */
   @keyframes octo-shine-left {
-    0%, 18%   { transform: translate(478px, 588px); }            /* center */
-    20%, 38%  { transform: translate(490px, 583px); }            /* glance up-right */
-    40%, 55%  { transform: translate(495px, 595px); }            /* glance right */
-    57%, 72%  { transform: translate(483px, 602px); }            /* glance down */
-    74%, 88%  { transform: translate(468px, 593px); }            /* glance left */
-    90%, 100% { transform: translate(478px, 588px); }            /* back to center */
+    0%   { transform: translate(478px, 588px); }
+    6%   { transform: translate(479px, 587px); }   /* micro */
+    12%  { transform: translate(477px, 589px); }   /* micro */
+    18%  { transform: translate(478px, 588px); }
+    20%  { transform: translate(490px, 583px); }   /* saccade up-right */
+    26%  { transform: translate(491px, 582px); }   /* micro */
+    32%  { transform: translate(489px, 584px); }   /* micro */
+    38%  { transform: translate(490px, 583px); }
+    40%  { transform: translate(495px, 595px); }   /* saccade right */
+    46%  { transform: translate(496px, 594px); }   /* micro */
+    52%  { transform: translate(494px, 596px); }   /* micro */
+    57%  { transform: translate(483px, 602px); }   /* saccade down */
+    63%  { transform: translate(484px, 603px); }   /* micro */
+    69%  { transform: translate(482px, 601px); }   /* micro */
+    74%  { transform: translate(468px, 593px); }   /* saccade left */
+    80%  { transform: translate(469px, 592px); }   /* micro */
+    86%  { transform: translate(467px, 594px); }   /* micro */
+    90%  { transform: translate(478px, 588px); }
+    95%  { transform: translate(479px, 588px); }   /* micro */
+    100% { transform: translate(478px, 588px); }
   }
   @keyframes octo-shine-right {
-    0%, 18%   { transform: translate(741px, 588px); }
-    20%, 38%  { transform: translate(753px, 583px); }
-    40%, 55%  { transform: translate(758px, 595px); }
-    57%, 72%  { transform: translate(746px, 602px); }
-    74%, 88%  { transform: translate(731px, 593px); }
-    90%, 100% { transform: translate(741px, 588px); }
+    0%   { transform: translate(741px, 588px); }
+    6%   { transform: translate(742px, 587px); }
+    12%  { transform: translate(740px, 589px); }
+    18%  { transform: translate(741px, 588px); }
+    20%  { transform: translate(753px, 583px); }
+    26%  { transform: translate(754px, 582px); }
+    32%  { transform: translate(752px, 584px); }
+    38%  { transform: translate(753px, 583px); }
+    40%  { transform: translate(758px, 595px); }
+    46%  { transform: translate(759px, 594px); }
+    52%  { transform: translate(757px, 596px); }
+    57%  { transform: translate(746px, 602px); }
+    63%  { transform: translate(747px, 603px); }
+    69%  { transform: translate(745px, 601px); }
+    74%  { transform: translate(731px, 593px); }
+    80%  { transform: translate(732px, 592px); }
+    86%  { transform: translate(730px, 594px); }
+    90%  { transform: translate(741px, 588px); }
+    95%  { transform: translate(742px, 588px); }
+    100% { transform: translate(741px, 588px); }
   }
 }
 
