@@ -65,33 +65,28 @@
     0%, 92%, 100% { transform: scaleY(0); }
     94%, 97% { transform: scaleY(1); }
   }
+  /* Both eyes look in the same direction. Natural saccades: quick movement,
+     long fixation pauses. Offsets are the SAME for both eyes. */
   @keyframes octo-shine-left {
-    0%   { transform: translate(478px, 588px); }
-    10%  { transform: translate(478px, 588px); }
-    22%  { transform: translate(490px, 580px); }
-    33%  { transform: translate(498px, 595px); }
-    45%  { transform: translate(485px, 605px); }
-    55%  { transform: translate(485px, 605px); }
-    68%  { transform: translate(470px, 600px); }
-    80%  { transform: translate(465px, 585px); }
-    92%  { transform: translate(478px, 588px); }
-    100% { transform: translate(478px, 588px); }
+    0%, 18%   { transform: translate(478px, 588px); }            /* center */
+    20%, 38%  { transform: translate(490px, 583px); }            /* glance up-right */
+    40%, 55%  { transform: translate(495px, 595px); }            /* glance right */
+    57%, 72%  { transform: translate(483px, 602px); }            /* glance down */
+    74%, 88%  { transform: translate(468px, 593px); }            /* glance left */
+    90%, 100% { transform: translate(478px, 588px); }            /* back to center */
   }
   @keyframes octo-shine-right {
-    0%   { transform: translate(741px, 588px); }
-    8%   { transform: translate(730px, 595px); }
-    20%  { transform: translate(728px, 580px); }
-    35%  { transform: translate(745px, 575px); }
-    42%  { transform: translate(745px, 575px); }
-    55%  { transform: translate(760px, 590px); }
-    70%  { transform: translate(752px, 605px); }
-    85%  { transform: translate(738px, 600px); }
-    100% { transform: translate(741px, 588px); }
+    0%, 18%   { transform: translate(741px, 588px); }
+    20%, 38%  { transform: translate(753px, 583px); }
+    40%, 55%  { transform: translate(758px, 595px); }
+    57%, 72%  { transform: translate(746px, 602px); }
+    74%, 88%  { transform: translate(731px, 593px); }
+    90%, 100% { transform: translate(741px, 588px); }
   }
 }
 
-.octo-shine-left { animation: octo-shine-left 9s ease-in-out infinite; transform: translate(478px, 588px); }
-.octo-shine-right { animation: octo-shine-right 11s ease-in-out infinite; transform: translate(741px, 588px); }
+.octo-shine-left { animation: octo-shine-left 10s ease-in-out infinite; transform: translate(478px, 588px); }
+.octo-shine-right { animation: octo-shine-right 10s ease-in-out infinite; transform: translate(741px, 588px); }
 .octo-lid { transform-box: fill-box; transform-origin: center; animation: octo-blink 5s ease-in-out infinite; }
 
 :root {
