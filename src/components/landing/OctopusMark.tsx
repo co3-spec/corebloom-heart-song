@@ -21,27 +21,67 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
       >
         <defs>
           <clipPath id="octo-head-clip">
-            <rect x="0" y="0" width="1254" height="700" />
+            <rect x="0" y="0" width="1254" height="720" />
           </clipPath>
           <clipPath id="octo-legs-clip">
-            <rect x="0" y="660" width="1254" height="594" />
+            <rect x="0" y="600" width="1254" height="654" />
           </clipPath>
-          <filter id="octo-legs-wiggle" x="-5%" y="-5%" width="110%" height="110%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.018" numOctaves="2" seed="4" result="noise">
+          {/* Big-amplitude, slow turbulence → tentacle tips curl and grasp.
+              filterUnits=userSpaceOnUse + generous region prevents tip clipping. */}
+          <filter
+            id="octo-legs-wiggle"
+            filterUnits="userSpaceOnUse"
+            x="-80"
+            y="540"
+            width="1414"
+            height="800"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.006 0.009"
+              numOctaves="2"
+              seed="5"
+              result="noise"
+            >
               <animate
                 attributeName="baseFrequency"
-                dur="9s"
-                values="0.008 0.018; 0.012 0.024; 0.009 0.02; 0.008 0.018"
+                dur="7s"
+                values="0.006 0.009; 0.010 0.014; 0.007 0.011; 0.009 0.016; 0.006 0.009"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="seed"
+                dur="14s"
+                values="5;6;7;8;5"
                 repeatCount="indefinite"
               />
             </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="55"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
           </filter>
         </defs>
-        {/* Head — static so eyes stay aligned */}
-        <image href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" clipPath="url(#octo-head-clip)" />
-        {/* Tentacles — independently wiggling via animated turbulence displacement */}
-        <image href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" clipPath="url(#octo-legs-clip)" filter="url(#octo-legs-wiggle)" />
+        {/* Tentacles first — rippling/curling */}
+        <image
+          href={octopusUrl}
+          width="1254"
+          height="1254"
+          preserveAspectRatio="xMidYMid meet"
+          clipPath="url(#octo-legs-clip)"
+          filter="url(#octo-legs-wiggle)"
+        />
+        {/* Head on top — covers seam and keeps eyes perfectly still */}
+        <image
+          href={octopusUrl}
+          width="1254"
+          height="1254"
+          preserveAspectRatio="xMidYMid meet"
+          clipPath="url(#octo-head-clip)"
+        />
         {/* Animated shine in eyes */}
         <g className="octo-shine-left">
           <circle cx="0" cy="0" r="10" fill="#ffffff" opacity="0.95" />
