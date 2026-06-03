@@ -19,7 +19,7 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
         aria-label="Coreblow octopus mascot"
         role="img"
       >
-        <image href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" />
+        <image className="octo-body" href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" />
         {/* Animated shine in eyes */}
         <g className="octo-shine-left">
           <circle cx="0" cy="0" r="10" fill="#ffffff" opacity="0.95" />
