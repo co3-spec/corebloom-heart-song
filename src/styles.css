@@ -120,16 +120,6 @@
 /* Tentacle motion is now driven by an SVG turbulence + displacement filter
    inside OctopusMark.tsx, so each leg ripples independently while the head
    (and eyes) stay perfectly still. No CSS body sway needed. */
-  60%  { transform: rotate(0.2deg) skewX(0.6deg) scaleY(0.998); }
-  75%  { transform: rotate(-0.9deg) skewX(1.2deg) scaleY(1.004); }
-  90%  { transform: rotate(0.6deg) skewX(-0.4deg) scaleY(0.999); }
-  100% { transform: rotate(0deg) skewX(0deg) scaleY(1); }
-}
-.octo-body {
-  transform-box: fill-box;
-  transform-origin: 50% 30%; /* pivot near the head so tentacles swing more than the head */
-  animation: octo-tentacle-sway 6s ease-in-out infinite;
-}
 
 :root {
   --radius: 0.5rem;
