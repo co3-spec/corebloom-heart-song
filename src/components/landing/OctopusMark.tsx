@@ -19,7 +19,29 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
         aria-label="Coreblow octopus mascot"
         role="img"
       >
-        <image className="octo-body" href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" />
+        <defs>
+          <clipPath id="octo-head-clip">
+            <rect x="0" y="0" width="1254" height="700" />
+          </clipPath>
+          <clipPath id="octo-legs-clip">
+            <rect x="0" y="660" width="1254" height="594" />
+          </clipPath>
+          <filter id="octo-legs-wiggle" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.018" numOctaves="2" seed="4" result="noise">
+              <animate
+                attributeName="baseFrequency"
+                dur="9s"
+                values="0.008 0.018; 0.012 0.024; 0.009 0.02; 0.008 0.018"
+                repeatCount="indefinite"
+              />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+        {/* Head — static so eyes stay aligned */}
+        <image href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" clipPath="url(#octo-head-clip)" />
+        {/* Tentacles — independently wiggling via animated turbulence displacement */}
+        <image href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" clipPath="url(#octo-legs-clip)" filter="url(#octo-legs-wiggle)" />
         {/* Animated shine in eyes */}
         <g className="octo-shine-left">
           <circle cx="0" cy="0" r="10" fill="#ffffff" opacity="0.95" />
