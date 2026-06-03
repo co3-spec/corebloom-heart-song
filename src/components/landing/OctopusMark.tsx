@@ -23,11 +23,13 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
           <clipPath id="octo-head-clip">
             <rect x="0" y="0" width="1254" height="720" />
           </clipPath>
-          <clipPath id="octo-legs-clip">
-            <rect x="0" y="600" width="1254" height="654" />
-          </clipPath>
-          {/* Big-amplitude, slow turbulence → tentacle tips curl and grasp.
-              filterUnits=userSpaceOnUse + generous region prevents tip clipping. */}
+          {/* 6 vertical bands — one per tentacle — each curls on its own rhythm */}
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <clipPath key={i} id={`octo-band-${i}`}>
+              <rect x={i * 209} y="600" width="209" height="654" />
+            </clipPath>
+          ))}
+          {/* Shared turbulence wiggle adds organic ripple on every band */}
           <filter
             id="octo-legs-wiggle"
             filterUnits="userSpaceOnUse"
@@ -38,7 +40,7 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
           >
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.006 0.009"
+              baseFrequency="0.006 0.010"
               numOctaves="2"
               seed="5"
               result="noise"
@@ -46,7 +48,7 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
               <animate
                 attributeName="baseFrequency"
                 dur="7s"
-                values="0.006 0.009; 0.010 0.014; 0.007 0.011; 0.009 0.016; 0.006 0.009"
+                values="0.006 0.010; 0.010 0.014; 0.007 0.012; 0.009 0.016; 0.006 0.010"
                 repeatCount="indefinite"
               />
               <animate
@@ -59,22 +61,26 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="55"
+              scale="40"
               xChannelSelector="R"
               yChannelSelector="G"
             />
           </filter>
         </defs>
-        {/* Tentacles first — rippling/curling */}
-        <image
-          href={octopusUrl}
-          width="1254"
-          height="1254"
-          preserveAspectRatio="xMidYMid meet"
-          clipPath="url(#octo-legs-clip)"
-          filter="url(#octo-legs-wiggle)"
-        />
-        {/* Head on top — covers seam and keeps eyes perfectly still */}
+        {/* Per-tentacle curl/breathe — each band scales Y on its own timing */}
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <g key={i} className={`octo-leg octo-leg-${i + 1}`}>
+            <image
+              href={octopusUrl}
+              width="1254"
+              height="1254"
+              preserveAspectRatio="xMidYMid meet"
+              clipPath={`url(#octo-band-${i})`}
+              filter="url(#octo-legs-wiggle)"
+            />
+          </g>
+        ))}
+        {/* Head on top — covers the seam and keeps eyes perfectly still */}
         <image
           href={octopusUrl}
           width="1254"
