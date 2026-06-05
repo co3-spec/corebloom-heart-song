@@ -19,75 +19,7 @@ export function OctopusMark({ size = 240, className, monochrome = false }: Octop
         aria-label="Coreblow octopus mascot"
         role="img"
       >
-        <defs>
-          <clipPath id="octo-head-clip">
-            <rect x="0" y="0" width="1254" height="720" />
-          </clipPath>
-          {/* 6 vertical bands — one per tentacle — each curls on its own rhythm */}
-          {[0, 1, 2, 3, 4, 5].map((i) => (
-            <clipPath key={i} id={`octo-band-${i}`}>
-              <rect x={i * 209} y="600" width="209" height="654" />
-            </clipPath>
-          ))}
-          {/* Shared turbulence wiggle adds organic ripple on every band */}
-          <filter
-            id="octo-legs-wiggle"
-            filterUnits="userSpaceOnUse"
-            x="-80"
-            y="540"
-            width="1414"
-            height="800"
-          >
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.006 0.010"
-              numOctaves="2"
-              seed="5"
-              result="noise"
-            >
-              <animate
-                attributeName="baseFrequency"
-                dur="7s"
-                values="0.006 0.010; 0.010 0.014; 0.007 0.012; 0.009 0.016; 0.006 0.010"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="seed"
-                dur="14s"
-                values="5;6;7;8;5"
-                repeatCount="indefinite"
-              />
-            </feTurbulence>
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale="40"
-              xChannelSelector="R"
-              yChannelSelector="G"
-            />
-          </filter>
-        </defs>
-        {/* Per-tentacle curl/breathe — each band scales Y on its own timing */}
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <g key={i} className={`octo-leg octo-leg-${i + 1}`}>
-            <image
-              href={octopusUrl}
-              width="1254"
-              height="1254"
-              preserveAspectRatio="xMidYMid meet"
-              clipPath={`url(#octo-band-${i})`}
-              filter="url(#octo-legs-wiggle)"
-            />
-          </g>
-        ))}
-        {/* Head on top — covers the seam and keeps eyes perfectly still */}
-        <image
-          href={octopusUrl}
-          width="1254"
-          height="1254"
-          preserveAspectRatio="xMidYMid meet"
-          clipPath="url(#octo-head-clip)"
-        />
+        <image href={octopusUrl} width="1254" height="1254" preserveAspectRatio="xMidYMid meet" />
         {/* Animated shine in eyes */}
         <g className="octo-shine-left">
           <circle cx="0" cy="0" r="10" fill="#ffffff" opacity="0.95" />
