@@ -4,25 +4,16 @@ import { TerminalWindow } from "./TerminalWindow";
 export function Hero() {
   return (
     <section className="relative pt-20 pb-32 px-6 overflow-hidden">
-      {/* Background radial glow */}
+      {/* Soft ambient glow */}
       <div
         aria-hidden
-        className="absolute top-0 left-1/2 -translate-x-1/2 size-[700px] rounded-full blur-3xl pointer-events-none animate-glow"
+        className="absolute top-0 left-1/2 -translate-x-1/2 size-[700px] rounded-full blur-3xl pointer-events-none opacity-40"
         style={{
           background:
-            "radial-gradient(circle, color-mix(in oklab, var(--color-accent) 30%, transparent), transparent 70%)",
+            "radial-gradient(circle, color-mix(in oklab, var(--color-coral) 18%, transparent), transparent 70%)",
         }}
       />
-      {/* Grid backdrop */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--color-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+
 
       <div className="relative max-w-5xl mx-auto text-center">
         {/* Mascot */}
