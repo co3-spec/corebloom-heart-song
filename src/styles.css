@@ -118,32 +118,33 @@
 .octo-lid { transform-box: fill-box; transform-origin: center; animation: octo-blink 5s ease-in-out infinite; }
 
 :root {
-  --radius: 0.5rem;
-  /* Brutalist neon dark — single theme, no light mode toggle */
-  --background: oklch(0.13 0.01 240);
-  --foreground: oklch(0.98 0.02 180);
-  --card: oklch(0.16 0.01 240);
-  --card-foreground: oklch(0.98 0.02 180);
-  --popover: oklch(0.16 0.01 240);
-  --popover-foreground: oklch(0.98 0.02 180);
-  --primary: oklch(0.86 0.18 200);
-  --primary-foreground: oklch(0.13 0.01 240);
-  --secondary: oklch(0.22 0.02 240);
-  --secondary-foreground: oklch(0.98 0.02 180);
-  --muted: oklch(0.2 0.01 240);
-  --muted-foreground: oklch(0.65 0.02 240);
-  --accent: oklch(0.86 0.18 200); /* neon cyan #00f5ff-ish */
-  --accent-foreground: oklch(0.13 0.01 240);
-  --destructive: oklch(0.6 0.25 25);
+  --radius: 0.75rem;
+  /* Light minimal theme — inspired by Bless dashboard */
+  --background: oklch(0.985 0.002 250);
+  --foreground: oklch(0.22 0.01 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.01 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.01 250);
+  --primary: oklch(0.22 0.01 250);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.96 0.003 250);
+  --secondary-foreground: oklch(0.25 0.01 250);
+  --muted: oklch(0.96 0.003 250);
+  --muted-foreground: oklch(0.5 0.01 250);
+  --accent: oklch(0.22 0.01 250);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.6 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.25 0.01 240);
-  --input: oklch(0.25 0.01 240);
-  --ring: oklch(0.86 0.18 200);
+  --border: oklch(0.92 0.003 250);
+  --input: oklch(0.92 0.003 250);
+  --ring: oklch(0.7 0.01 250);
 
-  /* Octopus mascot — coral palette from reference image */
+  /* Octopus mascot — coral palette (locked) */
   --coral: oklch(0.7 0.15 30);
   --coral-deep: oklch(0.58 0.16 30);
 }
+
 
 @layer base {
   * {
